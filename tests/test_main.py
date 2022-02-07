@@ -58,6 +58,11 @@ from app.point import Point
             [("one", 1), ("two", 22), (145, -1), (Point(1, 1), "A")],
             id="the value should be reassigned when the key already exists",
         ),
+        pytest.param(
+            [(f"Element {i}", i) for i in range(1000)],
+            [(f"Element {i}", i) for i in range(1000)],
+            id="dict should resize bucket",
+        ),
     ],
 )
 def test_dictionary_add(items: list, pairs_after_adding: list):
