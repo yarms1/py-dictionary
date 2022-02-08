@@ -9,7 +9,8 @@ Let's create your own class `Dictionary` and implement methods:
 - `__len__(self)`
 
 Be attentive to basic requirements for the implementation of the dictionary (initial capacity, load factor, resize ...)
-Also, not forgot to store (key, hash, value) as node in hash table.
+
+Also, not forgot to store `(key, hash, value)` as node in hash table.
 
 Notes: 
 - you can implement other methods of the dict interface (both regular and magic):
