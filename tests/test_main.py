@@ -84,7 +84,7 @@ from app.point import Point
     ],
 )
 @mock.patch("app.main.hash")
-def test_dictionary_add(mock_hash, items: list, pairs_after_adding: list):
+def test_dictionary_add(mock_hash: mock, items: list, pairs_after_adding: list):
     mock_hash.return_value = 3
 
     dictionary = Dictionary()
