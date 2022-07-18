@@ -1,3 +1,5 @@
+from unittest import mock
+
 import pytest
 
 from app.main import Dictionary
@@ -45,22 +47,46 @@ from app.point import Point
         ),
         pytest.param(
             [
+                (8, "8"),
+                (16, "16"),
+                (32, "32"),
+                (64, "64"),
+                (128, "128"),
                 ("one", 2),
                 ("two", 2),
                 (Point(1, 1), "a"),
                 ("one", 1),
+                ("one", 11),
+                ("one", 111),
+                ("one", 1111),
                 (145, 146),
                 (145, 145),
                 (145, -1),
                 ("two", 22),
+                ("two", 222),
+                ("two", 2222),
+                ("two", 22222),
                 (Point(1, 1), "A"),
             ],
-            [("one", 1), ("two", 22), (145, -1), (Point(1, 1), "A")],
+            [
+                (8, "8"),
+                (16, "16"),
+                (32, "32"),
+                (64, "64"),
+                (128, "128"),
+                ("one", 1111),
+                ("two", 22222),
+                (145, -1),
+                (Point(1, 1), "A"),
+            ],
             id="the value should be reassigned when the key already exists",
         ),
     ],
 )
-def test_dictionary_add(items: list, pairs_after_adding: list):
+@mock.patch("app.main.hash")
+def test_dictionary_add(mock_hash: mock, items: list, pairs_after_adding: list):
+    mock_hash.return_value = 3
+
     dictionary = Dictionary()
     for key, value in items:
         dictionary[key] = value
@@ -81,7 +107,7 @@ def test_resize_bucket():
         assert dictionary[key] == value
     assert len(dictionary) == len(items)
 
-    
+
 def test_missing_key():
     dictionary = Dictionary()
     with pytest.raises(KeyError):
