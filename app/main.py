@@ -37,7 +37,7 @@ class Dictionary:
         for k, v in bucket:
             if k == key:
                 return v
-        raise KeyError(f"Key {key} not found")
+        raise KeyError(f"Key not found")
 
     def __len__(self) -> int:
         return self.size
