@@ -9,9 +9,6 @@ class Dictionary:
         self.load_factor: float = load_factor
         self.table: List[List[Tuple[Any, Any]]] = [[] for _ in range(self.capacity)]  # noqa: E501
 
-    def _hash(self, key: Any) -> int:
-        return hash(key) % self.capacity
-
     def __setitem__(self, key: Any, value: Any) -> None:
         index: int = self._hash(key)
         bucket: List[Tuple[Any, Any]] = self.table[index]
@@ -53,3 +50,6 @@ class Dictionary:
 
         self.capacity = new_capacity
         self.table = new_table
+
+    def _hash(self, key: Any) -> int:
+        return hash(key) % self.capacity
